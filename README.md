@@ -8,9 +8,9 @@ This project is a **microservices-based e-commerce system** built using **Django
 
 ```bash
 ecommerce-microservices/
-│── user_service/          # User authentication & management (Django + DRF)
+│── user_service/          # User authentication & management (DRF)
 │── product_service/       # Product catalog & details (FastAPI)
-│── order_service/         # Order management (Django + DRF)
+│── order_service/         # Order management (DRF)
 │── payment_service/       # Payment processing (FastAPI)
 │── inventory_service/     # Inventory tracking (DRF or FastAPI)
 │── notification_service/  # Email/SMS/Push notifications (FastAPI + Celery + Redis)
