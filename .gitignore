@@ -8,4 +8,4 @@ __pycache__/
 *.py[cod]
 
 # (Optional) Ignore migrations directories — use with caution
-*/migrations/
+**/migrations/
