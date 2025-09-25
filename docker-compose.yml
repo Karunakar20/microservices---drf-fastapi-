@@ -1,0 +1,163 @@
+# version: "3.9"
+
+services:
+  # ----------------- Databases -----------------
+  user_db:
+    image: postgres:16
+    container_name: user_db
+    environment:
+
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: user@1234
+      POSTGRES_DB: user_service_db
+    ports:
+      - "5001:5432"
+    volumes:
+      - user_db_data:/var/lib/postgresql/data
+
+  product_db:
+    image: postgres:16
+    container_name: product_db
+    environment:
+      POSTGRES_USER: product
+      POSTGRES_PASSWORD: product@1234
+      POSTGRES_DB: product_service_db
+    ports:
+      - "5002:5432"
+    volumes:
+      - product_db_data:/var/lib/postgresql/data
+
+  order_db:
+    image: postgres:16
+    container_name: order_db
+    environment:
+      POSTGRES_USER: order
+      POSTGRES_PASSWORD: order@1234
+      POSTGRES_DB: order_service_db
+    ports:
+      - "5003:5432"
+    volumes:
+      - order_db_data:/var/lib/postgresql/data
+
+  payment_db:
+    image: postgres:16
+    container_name: payment_db
+    environment:
+      POSTGRES_USER: payment
+      POSTGRES_PASSWORD: payment@1234
+      POSTGRES_DB: payment_service_db
+    ports:
+      - "5004:5432"
+    volumes:
+      - payment_db_data:/var/lib/postgresql/data
+
+  inventory_db:
+    image: postgres:16
+    container_name: inventory_db
+    environment:
+      POSTGRES_USER: inventory
+      POSTGRES_PASSWORD: inventory@1234
+      POSTGRES_DB: inventory_service_db
+    ports:
+      - "5005:5432"
+    volumes:
+      - inventory_db_data:/var/lib/postgresql/data
+
+  # ----------------- Services -----------------
+
+  # django:
+  #   build: ./user_service
+  #   container_name: user_service
+  #   command: python manage.py runserver 0.0.0.0:8000
+  #   volumes:
+  #     - .:/app
+  #   ports:
+  #     - "8000:8000"
+  #   depends_on:
+  #     - user_db
+  # user_service:
+  #   build: ./user_service
+  #   depends_on:
+  #     - user_db
+  #   environment:
+  #     DATABASE_URL: postgres://user_admin:user_pass@user_db:5432/user_service_db
+  #   ports:
+  #     - "8001:8000"
+
+  # product_service:
+  #   build: ./product_service
+  #   depends_on:
+  #     - product_db
+  #   environment:
+  #     DATABASE_URL: postgres://product_admin:product_pass@product_db:5432/product_service_db
+  #   ports:
+  #     - "8002:8000"
+
+  # order_service:
+  #   build: ./order_service
+  #   depends_on:
+  #     - order_db
+  #   environment:
+  #     DATABASE_URL: postgres://order_admin:order_pass@order_db:5432/order_service_db
+  #   ports:
+  #     - "8003:8000"
+
+  # payment_service:
+  #   build: ./payment_service
+  #   depends_on:
+  #     - payment_db
+  #   environment:
+  #     DATABASE_URL: postgres://payment_admin:payment_pass@payment_db:5432/payment_service_db
+  #   ports:
+  #     - "8004:8000"
+
+  # inventory_service:
+  #   build: ./inventory_service
+  #   depends_on:
+  #     - inventory_db
+  #   environment:
+  #     DATABASE_URL: postgres://inventory_admin:inventory_pass@inventory_db:5432/inventory_service_db
+  #   ports:
+  #     - "8005:8000"
+
+  # notification_service:
+  #   build: ./notification_service
+  #   depends_on:
+  #     - redis
+  #   environment:
+  #     REDIS_URL: redis://redis:6379/0
+  #   ports:
+  #     - "8006:8000"
+
+  # api_gateway:
+  #   build: ./api_gateway
+  #   depends_on:
+  #     - user_service
+  #     - product_service
+  #     - order_service
+  #     - payment_service
+  #     - inventory_service
+  #     - notification_service
+  #   ports:
+  #     - "8000:8000"
+
+  # # ----------------- Message Brokers -----------------
+  # redis:
+  #   image: redis:7
+  #   container_name: redis
+  #   ports:
+  #     - "6379:6379"
+
+  # rabbitmq:
+  #   image: rabbitmq:3-management
+  #   container_name: rabbitmq
+  #   ports:
+  #     - "5672:5672"
+  #     - "15672:15672"
+
+volumes:
+  user_db_data:
+  product_db_data:
+  order_db_data:
+  payment_db_data:
+  inventory_db_data:
