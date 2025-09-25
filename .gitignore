@@ -6,6 +6,8 @@ env/
 # Ignore Python bytecode
 __pycache__/
 *.py[cod]
+*.pyc
+
 
 # (Optional) Ignore migrations directories — use with caution
 **/migrations/
